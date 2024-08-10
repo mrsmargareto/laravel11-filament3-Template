@@ -22,6 +22,8 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
+use Kenepa\Banner\BannerPlugin;
+
 class AppPanelProvider extends PanelProvider
 {
 
@@ -44,6 +46,8 @@ class AppPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])->plugins([
+                BannerPlugin::make()
+                ->disableBannerManager(),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false)
                     ->shouldShowAvatarForm(
@@ -54,6 +58,7 @@ class AppPanelProvider extends PanelProvider
                     ->modalPreviews()
                     ->slideOverPreviews()
                     ->modalTitleBreadcrumbs(),
+
             ])->userMenuItems([
                 'profile' => MenuItem::make()
                     ->label(fn () => auth()->user()->name)

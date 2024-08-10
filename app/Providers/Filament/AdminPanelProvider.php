@@ -21,6 +21,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Kenepa\Banner\BannerPlugin;
 
 
 
@@ -44,11 +45,17 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->plugins([
+                BannerPlugin::make()
+                    ->navigationIcon('heroicon-o-megaphone')
+                    ->navigationLabel('Banners')
+                    //->navigationGroup('')
+                    ->navigationSort(1),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false)
                     ->shouldShowAvatarForm(
                         directory: 'avatars',
                     ),
+
                     
             ])->userMenuItems([
                 'profile' => MenuItem::make()

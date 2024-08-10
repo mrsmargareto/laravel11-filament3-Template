@@ -13,6 +13,7 @@
         "filament/filament": "^3.2",
         "guava/filament-knowledge-base": "^1.9",
         "joaopaulolndev/filament-edit-profile": "^1.0",
+        "kenepa/banner": "^0.0.5",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "spatie/laravel-activitylog": "^4.8"
