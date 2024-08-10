@@ -29,13 +29,16 @@ class AdminPanelProvider extends PanelProvider
 {
 
     public function panel(Panel $panel): Panel
+    
     {
         return $panel
-            
+        
             ->id('admin')
             ->path('admin')
             ->profile()
             ->login(Login::class)
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Blue,
             ])
