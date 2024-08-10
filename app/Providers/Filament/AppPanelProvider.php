@@ -23,6 +23,7 @@ use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
 use Kenepa\Banner\BannerPlugin;
+use Joaopaulolndev\FilamentWorldClock\FilamentWorldClockPlugin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -46,8 +47,25 @@ class AppPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])->plugins([
+
                 BannerPlugin::make()
-                ->disableBannerManager(),
+                    ->disableBannerManager(),
+                FilamentWorldClockPlugin::make()
+                    ->timezones([
+                        'America/Chicago', // Central Time
+                        'America/New_York', // Eastern Time
+                        'America/Los_Angeles', // Pacific Time
+                        'Asia/Manila', // Philippines
+                        'Asia/Kolkata', // India
+                        'Asia/Tokyo', // Japan
+                    ])
+                    ->setQuantityPerRow(3) //Optional quantity per row default is: 1
+                    ->setTimeFormat('H:i') //Optional time format default is: 'H:i'
+                    ->shouldShowTitle(false) //Optional show title default is: true
+                    ->setTitle('Hours') //Optional title default is: 'World Clock'
+                    //->setDescription('Different description') //Optional description default is: 'Show hours around the world by timezone'
+                    ->setColumnSpan('full') //Optional column span default is: '1/2'
+                    ->setSort(10),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false)
                     ->shouldShowAvatarForm(
@@ -61,8 +79,8 @@ class AppPanelProvider extends PanelProvider
 
             ])->userMenuItems([
                 'profile' => MenuItem::make()
-                    ->label(fn () => auth()->user()->name)
-                    ->url(fn (): string => EditProfilePage::getUrl())
+                    ->label(fn() => auth()->user()->name)
+                    ->url(fn(): string => EditProfilePage::getUrl())
                     ->icon('heroicon-m-user-circle')
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
