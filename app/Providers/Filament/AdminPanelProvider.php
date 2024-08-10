@@ -47,9 +47,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 BannerPlugin::make()
                     ->navigationIcon('heroicon-o-megaphone')
-                    ->navigationLabel('Banners')
-                    //->navigationGroup('')
-                    ->navigationSort(1),
+                    ->navigationLabel('Banners'),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false)
                     ->shouldShowAvatarForm(
@@ -81,6 +79,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->viteTheme('resources/css/filament/app/theme.css');
     }
 }
