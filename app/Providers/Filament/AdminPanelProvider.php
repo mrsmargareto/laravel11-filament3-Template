@@ -7,9 +7,11 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Filament\Auth\Login;
+use Kenepa\Banner\BannerPlugin;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
 use Filament\Http\Middleware\Authenticate;
+use Rmsramos\Activitylog\ActivitylogPlugin;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -20,9 +22,8 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use Kenepa\Banner\BannerPlugin;
 use Joaopaulolndev\FilamentWorldClock\FilamentWorldClockPlugin;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 
 
 
@@ -49,6 +50,8 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->plugins([
+                //https://filamentphp.com/plugins/rmsramos-activitylog#installation
+                ActivitylogPlugin::make(),
                 FilamentWorldClockPlugin::make()
                     ->timezones([
                         'America/Chicago', // Central Time
