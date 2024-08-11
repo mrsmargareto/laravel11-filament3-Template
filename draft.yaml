@@ -1,5 +1,6 @@
 models:
-  # ...
+  Test:
+    name: string
+    description: longtext
 
-controllers:
-  # ...
+
