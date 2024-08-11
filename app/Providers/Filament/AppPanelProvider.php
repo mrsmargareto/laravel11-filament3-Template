@@ -47,7 +47,8 @@ class AppPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])->plugins([
-
+                \Awcodes\Curator\CuratorPlugin::make()
+                    ->registerNavigation(false),
                 BannerPlugin::make()
                     ->disableBannerManager(),
                 FilamentWorldClockPlugin::make()

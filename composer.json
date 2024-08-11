@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awcodes/filament-curator": "^3.6",
         "bezhansalleh/filament-panel-switch": "^1.0",
         "filament/filament": "^3.2",
         "guava/filament-knowledge-base": "^1.9",
@@ -18,7 +19,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "rmsramos/activitylog": "^1.0",
-        "spatie/laravel-activitylog": "^4.8"
+        "spatie/laravel-activitylog": "^4.8",
+        "z3d0x/filament-fabricator": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

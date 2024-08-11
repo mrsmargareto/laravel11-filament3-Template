@@ -9,5 +9,6 @@ export default {
         './vendor/guava/filament-knowledge-base/src/**/*.php',
         './vendor/guava/filament-knowledge-base/resources/**/*.blade.php',
         './vendor/kenepa/banner/resources/**/*.php',
+        './vendor/awcodes/filament-curator/resources/**/*.blade.php',
     ],
 }

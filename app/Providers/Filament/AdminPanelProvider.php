@@ -17,6 +17,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -24,7 +25,6 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentWorldClock\FilamentWorldClockPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-
 
 
 class AdminPanelProvider extends PanelProvider
@@ -50,8 +50,11 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->plugins([
+
                 //https://filamentphp.com/plugins/rmsramos-activitylog#installation
                 ActivitylogPlugin::make(),
+                \Awcodes\Curator\CuratorPlugin::make(),
+                FilamentFabricatorPlugin::make(),
                 FilamentWorldClockPlugin::make()
                     ->timezones([
                         'America/Chicago', // Central Time
