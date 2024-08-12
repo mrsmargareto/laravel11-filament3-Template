@@ -7,9 +7,12 @@
                     <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">Slow-carb next level
                         shoindxgoitch ethical authentic, scenester sriracha forage.</h1>
                     <button
-                        class="flex-shrink-0 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg mt-10 sm:mt-0">Button</button>
+                        class=" text-white bg-yellow-500 flex-shrink-0 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg mt-10 sm:mt-0">Button</button>
                 </div>
             </div>
+
+
+
         </section>
     </div>
 </div>
