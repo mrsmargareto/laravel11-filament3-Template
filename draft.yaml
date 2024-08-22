@@ -1,6 +1,10 @@
+#https://blueprint.laravelshift.com/
 models:
-  Test:
+  Status:
     name: string
-    description: longtext
+    label: string
+    color: string
+    icon: string
+    use_case: string
 
 

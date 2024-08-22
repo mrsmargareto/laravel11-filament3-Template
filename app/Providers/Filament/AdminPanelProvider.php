@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -17,14 +18,13 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentWorldClock\FilamentWorldClockPlugin;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+
 
 
 class AdminPanelProvider extends PanelProvider
@@ -37,15 +37,17 @@ class AdminPanelProvider extends PanelProvider
 
             ->id('admin')
             ->path('admin')
-            ->profile()
+            ->profile(EditProfile::class)
             ->login(Login::class)
             ->sidebarFullyCollapsibleOnDesktop()
+            //->databaseNotifications()
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
+            ->discoverClusters(in: app_path('Filament/Admin/Clusters'), for: 'App\\Filament\\Admin\\Clusters')
             ->pages([
                 Pages\Dashboard::class,
             ])
@@ -54,7 +56,6 @@ class AdminPanelProvider extends PanelProvider
                 //https://filamentphp.com/plugins/rmsramos-activitylog#installation
                 ActivitylogPlugin::make(),
                 \Awcodes\Curator\CuratorPlugin::make(),
-                FilamentFabricatorPlugin::make(),
                 FilamentWorldClockPlugin::make()
                     ->timezones([
                         'America/Chicago', // Central Time
@@ -74,18 +75,6 @@ class AdminPanelProvider extends PanelProvider
                 BannerPlugin::make()
                     ->navigationIcon('heroicon-o-megaphone')
                     ->navigationLabel('Banners'),
-                FilamentEditProfilePlugin::make()
-                    ->shouldRegisterNavigation(false)
-                    ->shouldShowAvatarForm(
-                        directory: 'avatars',
-                    ),
-
-
-            ])->userMenuItems([
-                'profile' => MenuItem::make()
-                    ->label(fn() => auth()->user()->name)
-                    ->url(fn(): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-m-user-circle')
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([

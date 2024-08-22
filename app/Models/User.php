@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Storage;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 //use Filament\Models\Contracts\HasTenants;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
     use HasFactory, Notifiable;
 
@@ -20,6 +21,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'password',
         'remember_token',
     ];
+
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
     public function getFilamentAvatarUrl(): ?string
     {

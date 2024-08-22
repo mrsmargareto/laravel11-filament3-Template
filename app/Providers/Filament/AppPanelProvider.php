@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -19,8 +20,6 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
 use Kenepa\Banner\BannerPlugin;
 use Joaopaulolndev\FilamentWorldClock\FilamentWorldClockPlugin;
@@ -35,15 +34,17 @@ class AppPanelProvider extends PanelProvider
             ->default()
             ->id('app')
             ->path('')
-            ->profile()
+            ->profile(EditProfile::class)
             ->login(Login::class)
             ->sidebarFullyCollapsibleOnDesktop()
+            //->databaseNotifications()
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
+            ->discoverClusters(in: app_path('Filament/App/Clusters'), for: 'App\\Filament\\App\\Clusters')
             ->pages([
                 Pages\Dashboard::class,
             ])->plugins([
@@ -67,22 +68,13 @@ class AppPanelProvider extends PanelProvider
                     //->setDescription('Different description') //Optional description default is: 'Show hours around the world by timezone'
                     ->setColumnSpan('full') //Optional column span default is: '1/2'
                     ->setSort(10),
-                FilamentEditProfilePlugin::make()
-                    ->shouldRegisterNavigation(false)
-                    ->shouldShowAvatarForm(
-                        directory: 'avatars',
-                    ),
+
                 KnowledgeBasePlugin::make()
                     ->disableKnowledgeBasePanelButton()
                     ->modalPreviews()
                     ->slideOverPreviews()
                     ->modalTitleBreadcrumbs(),
 
-            ])->userMenuItems([
-                'profile' => MenuItem::make()
-                    ->label(fn() => auth()->user()->name)
-                    ->url(fn(): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-m-user-circle')
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([

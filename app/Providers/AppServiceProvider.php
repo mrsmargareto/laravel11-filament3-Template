@@ -27,16 +27,16 @@ class AppServiceProvider extends ServiceProvider
             'panels::body.end',
             fn (): string => Blade::render("@vite('resources/js/app.js')")
         );
-        
-        
+
+
         KnowledgeBasePanel::configureUsing(
             fn(KnowledgeBasePanel $panel) => $panel
                 ->disableBackToDefaultPanelButton()
                 ->brandName('My Docs')
                 ->viteTheme('resources/css/filament/app/theme.css') // your filament vite theme path here
-                
+
         );
-        
+
     }
 
 
